@@ -1,0 +1,20 @@
+{
+  "name": "training-sessions",
+  "version": "1.0.0",
+  "description": "this is a training project/package",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/hapi": "^20.2.2",
+    "@hapi/inert": "^7.0.0",
+    "@hapi/vision": "^7.0.0",
+    "dotenv": "^16.0.3",
+    "hapi-swagger": "^14.5.5",
+    "joi": "^17.6.4",
+    "mongoose": "^6.7.0"
+  }
+}
