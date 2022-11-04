@@ -1,10 +1,9 @@
-"use strict";
-
+require("dotenv").config();
 const Hapi = require("@hapi/hapi");
 const Inert = require("@hapi/inert");
 const Vision = require("@hapi/vision");
 const HapiSwagger = require("hapi-swagger");
-require('./src/database');
+require("./src/database");
 const routes = require("./src/routes");
 
 const initializeServer = async () => {
@@ -18,7 +17,7 @@ const initializeServer = async () => {
       title: "Training Sessions",
       version: "1.0.0",
     },
-    grouping: 'tags'
+    grouping: "tags",
   };
 
   await server.register([
@@ -26,10 +25,9 @@ const initializeServer = async () => {
     Vision,
     {
       plugin: HapiSwagger,
-      options:  swaggerOptions,
+      options: swaggerOptions,
     },
   ]);
-  
 
   server.route(routes);
 

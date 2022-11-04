@@ -1,17 +1,11 @@
 const Joi = require("joi");
-const mongoose = require("mongoose");
-const UserModel = mongoose.model("User");
+const userHandlers = require("../handlers/userHandlers");
 const userRoutes = [
   {
     method: "POST", //GET, POST, PUT, DELETE, PATCH, OPTIONS
     path: "/user",
     options: {
-      handler: (request, h) => {
-        UserModel.create(request.payload);
-        return {
-          message: "User created successfully",
-        };
-      },
+      handler: userHandlers.createUser,
       description: "This is the endpoint to create a user",
       notes: "email should not be used before",
       tags: ["api", "user"], // ADD THIS TAG
@@ -34,6 +28,27 @@ const userRoutes = [
             .min(2)
             .max(50)
             .required(),
+          password: Joi.string().default("123456"),
+        }),
+      },
+    },
+  },
+  {
+    method: "POST", //GET, POST, PUT, DELETE, PATCH, OPTIONS
+    path: "/user/login",
+    options: {
+      handler: userHandlers.login,
+      description: "This is the endpoint to login a user",
+      notes: "email should not be used before",
+      tags: ["api", "user"], // ADD THIS TAG
+      validate: {
+        payload: Joi.object({
+          email: Joi.string()
+            .email()
+            .default("a@b.com")
+            .description("user email")
+            .required(),
+          password: Joi.string().default("123456"),
         }),
       },
     },
@@ -42,12 +57,7 @@ const userRoutes = [
     method: "PUT", //GET, POST, PUT, DELETE, PATCH, OPTIONS
     path: "/user/{id}",
     options: {
-      handler: (request, h) => {
-        UserModel.findByIdAndUpdate(request.params.id, request.payload).exec();
-        return {
-          message: "User updated successfully",
-        };
-      },
+      handler: userHandlers.updateUser,
       description: "This is the endpoint to update a user",
       notes: "email should not be used before",
       tags: ["api", "user"], // ADD THIS TAG
@@ -83,13 +93,26 @@ const userRoutes = [
     method: "GET", //GET, POST, PUT, DELETE, PATCH, OPTIONS
     path: "/users",
     options: {
-      handler: (request, h) => {
-        return UserModel.find({});
-      },
+      handler: userHandlers.getAllUsers,
       description: "This is the endpoint to get all  users",
       notes: "notes",
       tags: ["api", "user"], // ADD THIS TAG
       validate: {},
+    },
+  },
+  {
+    method: "GET", //GET, POST, PUT, DELETE, PATCH, OPTIONS
+    path: "/user/{id}",
+    options: {
+      handler: userHandlers.getUserById,
+      description: "This is the endpoint to get user by id",
+      notes: "this is the notes",
+      tags: ["api", "user"], // ADD THIS TAG
+      validate: {
+        params: Joi.object({
+            id: Joi.string().regex(/^[0-9a-fA-F]{24}$/).required().description('the id for the user'),
+        }),
+      },
     },
   },
 ];

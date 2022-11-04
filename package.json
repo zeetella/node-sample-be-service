@@ -4,7 +4,8 @@
   "description": "this is a training project/package",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./index.js"
   },
   "author": "",
   "license": "ISC",
@@ -12,9 +13,11 @@
     "@hapi/hapi": "^20.2.2",
     "@hapi/inert": "^7.0.0",
     "@hapi/vision": "^7.0.0",
+    "bcryptjs": "^2.4.3",
     "dotenv": "^16.0.3",
     "hapi-swagger": "^14.5.5",
     "joi": "^17.6.4",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.7.0"
   }
 }

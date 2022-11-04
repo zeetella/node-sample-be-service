@@ -1,7 +1,8 @@
 const Mongoose = require('mongoose');
 require('./models/user');
+const CONFIGS = require("../configs/configs");
 
-Mongoose.connect('mongodb://localhost/trainingsessions', 
+Mongoose.connect(CONFIGS.MONGO.URL, 
     {
         useNewUrlParser: true,
         useUnifiedTopology: true 
