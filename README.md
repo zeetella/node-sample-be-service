@@ -1,12 +1,10 @@
 # node-basics
 
-clone the repo
+1- Clone the repo
 
-commands to execute in following order
+2- npm install
 
--> npm install
+3- Any one of below
 
-Any one of below
-
--> npm run start
--> node ./index.js 
+ - npm run start
+ - node ./index.js 
