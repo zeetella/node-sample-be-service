@@ -41,6 +41,7 @@ const userRoutes = [
       description: "This is the endpoint to login a user",
       notes: "email should not be used before",
       tags: ["api", "user"], // ADD THIS TAG
+      auth: false,
       validate: {
         payload: Joi.object({
           email: Joi.string()

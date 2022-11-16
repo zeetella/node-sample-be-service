@@ -7,7 +7,12 @@ const routes = [
     path: "/",
     options: {
       handler: (request, h) => {
+        console.log(request.auth.credentials.userId);
         return "Hello World! 123";
+      },
+      auth: {
+        strategy: "jwt",
+        scope: [ "ADMIN"],
       },
       description: "This is description",
       notes: "this is notes",

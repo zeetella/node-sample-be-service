@@ -18,10 +18,10 @@ const _generateToken = (user, role = CONFIGS.USER.DEFAULT_ROLE) => {
   return token;
 };
 
-const createUser = (request, h) => {
+const createUser = async (request, h) => {
   const user = request.payload;
   user.password = bcrypt.hashSync(user.password, 10);
-  UserModel.create(request.payload);
+  await UserModel.create(request.payload);
   return {
     message: "User created successfully",
   };
@@ -60,8 +60,25 @@ const updateUser = (request, h) => {
   };
 };
 
-const getAllUsers = (request, h) => {
-  return UserModel.find({}).exec();
+const getAllUsers = async (request, h) => {
+  try {
+    const promise1 = UserModel.find().exec();
+    const promise2 = UserModel.find().exec();
+    const promise3 = UserModel.find().exec();
+    const promise4 = UserModel.find().exec();
+
+    
+    return await Promise.all([
+      promise1,
+      promise2,
+      promise3,
+      promise4,
+    ]);
+
+  } catch (e) {
+    console.log(e);
+  }
+  return [];
 };
 
 const getUserById = (request, h) => {
